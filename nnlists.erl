@@ -10,7 +10,7 @@
 -author("mariocaster").
 
 %% API
--export([myLast/1, myButLast/1, elementAt/2]).
+-export([myLast/1, myButLast/1, elementAt/2, myLength/1, myReverse/1]).
 
 %% 1 - Find the last element of a list
 %% myLast([1,2,3,4,5]) -> 5
@@ -29,4 +29,12 @@ elementAt(1, [L|_]) -> L;
 elementAt(N, [_|List]) -> elementAt(N-1,List).
 
 %% 4 - Find the number of elements of a list.
-%% myLength([5,4,3,2,1]) -> 5
+myLength([]) -> 0;
+myLength([_|List]) -> 1 + myLength(List).
+
+%% 5 - Reverse a list
+myReverse([]) -> [];
+myReverse([H|List]) -> lists:concat([myReverse(List),H]).
+
+%% 6 - Find out whether a list is a palindrome. A palindrome can be read forward or backward; e.g. (x a m a x).
+
