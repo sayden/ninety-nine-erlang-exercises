@@ -10,7 +10,7 @@
 -author("mariocaster").
 
 %% API
--export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1]).
+-export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1]).
 
 %% 1 - Find the last element of a list
 %% Last([1,2,3,4,5]) -> 5
@@ -40,5 +40,11 @@ reverse([H|List]) -> lists:append(reverse(List),[H]).
 isPalindrome(List) -> List == reverse(List).
 
 %% 7 - Flatten a nested list structure.
-flatten([_]) -> [];
-flatten()
+flatten([]) -> [];
+flatten([[H|List]|List2]) -> flatten(H) ++ flatten(List) ++ flatten(List2);
+flatten([H|List]) -> flatten(H) ++ flatten(List);
+flatten(A) -> [A].
+
+%% 8 - Eliminate consecutive duplicates of list elements
+compress([F|List]) -> List.
+

@@ -7,4 +7,5 @@ Problem 03: (Solved) Find the K'th element of a list. The first element in the l
 Problem 04: (Solved) Find the number of elements of a list.
 Problem 05: (Solved) Reverse a list
 Problem 06: (Solved) Find out whether a list is a palindrome. A palindrome can be read forward or backward; e.g. (x a m a x).
-Problem 07: (In progress) Flatten a nested list structure.
+Problem 07: (Solved) Flatten a nested list structure.
+Problem 08: (In progress) Eliminate consecutive duplicates of list elements.
