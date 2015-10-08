@@ -10,7 +10,7 @@
 -author("mariocaster").
 
 %% API
--export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1, compress/1]).
+-export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1, compress/1, pack/1]).
 
 %% 1 - Find the last element of a list
 %% Last([1,2,3,4,5]) -> 5
@@ -49,3 +49,11 @@ flatten(A) -> [A].
 compress([]) -> [];
 compress([F|List]) -> [F] ++ compress(lists:dropwhile(fun(X) -> X == F end, List)).
 
+%% 9 - Pack consecutive duplicates of list elements into sublists. If a list contains repeated elements
+%% they should be placed in separate sublists.
+pack([]) -> [];
+pack([A|List]) -> [[A] ++ lists:takewhile(fun(X) -> A == X end, List)] ++ pack(lists:dropwhile(fun(X) -> A == X end, List)).
+
+%% 10 - Run-length encoding of a list. Use the result of problem P09 to implement the so-called run-length
+%% encoding data compression method. Consecutive duplicates of elements are encoded as lists (N E) where N
+%% is the number of duplicates of the element E.
