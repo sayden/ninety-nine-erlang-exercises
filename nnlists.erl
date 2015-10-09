@@ -11,7 +11,7 @@
 -import(utils, [head/1, tail/1]).
 
 %% API
--export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1, compress/1, pack/1, encode/1]).
+-export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1, compress/1, pack/1, encode/1, encodeModified/1]).
 
 %% 1 - Find the last element of a list
 %% Last([1,2,3,4,5]) -> 5
@@ -59,10 +59,28 @@ pack([A|List]) -> [[A] ++ lists:takewhile(fun(X) -> A == X end, List)] ++ pack(l
 %% encoding data compression method. Consecutive duplicates of elements are encoded as lists (N E) where N
 %% is the number of duplicates of the element E.
 encode(List) ->
-    Packed = pack(List),
-    Res = lists:map(fun(X) -> getElementAndLengthTuple(X) end, Packed),
-    Res.
+  Packed = pack(List),
+  Res = lists:map(fun(X) -> getElementAndLengthTuple(X) end, Packed),
+  Res.
 
 getElementAndLengthTuple(List) ->
-    [Head|_] = List,
-    {Head ,nnlists:length(List)}.
+  [Head|_] = List,
+  {Head ,nnlists:length(List)}.
+
+
+%% 11 - Modified run-length encoding.
+encodeModified(List) ->
+  Packed = pack(List),
+  Res = lists:map(fun(X) -> getElementAndLengthTupleModified(X) end, Packed),
+  Res.
+
+
+getElementAndLengthTupleModified(List) ->
+  case nnlists:length(List) of
+    1 -> List;
+    _Else ->
+      [Head|_] = List,
+      {Head, nnlists:length(List)}
+  end.
+
+%% 12 - Decode a run-length encoded list.
