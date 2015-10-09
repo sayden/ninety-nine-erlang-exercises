@@ -11,7 +11,8 @@
 -import(utils, [head/1, tail/1]).
 
 %% API
--export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1, compress/1, pack/1, encode/1, encodeModified/1]).
+-export([last/1, butLast/1, elementAt/2, length/1, reverse/1, isPalindrome/1, flatten/1, compress/1, pack/1, encode/1,
+  encodeModified/1, decode/1]).
 
 %% 1 - Find the last element of a list
 %% Last([1,2,3,4,5]) -> 5
@@ -84,3 +85,9 @@ getElementAndLengthTupleModified(List) ->
   end.
 
 %% 12 - Decode a run-length encoded list.
+decodeIf({A,N}) -> lists:duplicate(N,A);
+decodeIf([A]) -> [A].
+
+decode(List) -> lists:merge(lists:map(fun(X) -> decodeIf(X) end, List)).
+
+% 13 - Run-length encoding of a list (direct solution)
